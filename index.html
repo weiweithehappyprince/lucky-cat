@@ -98,7 +98,7 @@
     <body>
         <div class="card"> 
        <h1>你今天的幸运小猫</h1>
-    <h2>就是我</h2>
+    <h2 id="fortune-text">就是我</h2>
     <p>如何呢</p>
     <ul style="text-align: left;">
         <li>喜欢晒太阳 ☀️</li>
@@ -109,7 +109,7 @@
     <img src="https://cataas.com/cat" >
 </a>
     <p>
-        <a href="https://www.baidu.com" class="my-button">去百度看看</a>
+        <a href="#" class="my-button" onclick="getLuck()">查看今日运势</a>
     </p>
     <div class="social-box">
         <span>📞</span>
@@ -119,5 +119,51 @@
 
     
    </div> <p class="footer">© 2026 快乐王子 阿里嘎蒂朵喵喵</p>
+
+    <script>
+        function getLuck(){
+         let title = document.getElementById("fortune-text")
+            // 1. 准备一个“菜单”（数组）
+            // 你可以在这里随意加更多的词，记得用双引号包裹，逗号隔开
+         let fortunes = [
+            "🌟 超级大吉！ 🌟",
+            "🍀 小确幸 (中吉) 🍀",
+            "🌸 平平淡淡才是真 🌸",
+            "🚑 水逆退散 (凶) 🚑",
+            "🔥 鸿运当头 🔥",
+            "😴 宜：睡大觉"
+
+         ];
+            //2.掷骰子
+            //math.random()生成随机数
+            //fortunes.length 告诉它菜单一共几个菜
+            let index = Math.floor(Math.random()* fortunes.length)
+            let result = fortunes[index]
+
+
+            //3.把选中的拿出来，显示到屏幕
+            //fortunes[index]的意思是“给我拿菜单第index号的菜”
+            title.innerText = fortunes[index]
+
+            //4. 换颜色
+           if (result.includes("凶")){
+            title.style.color = "#555";
+           } else {
+
+            title.style.color = "#e74c3c"
+           }
+
+        }
+
+
+
+
+
+
+
+    </script>
+
+
+
 </body>
 </html>
