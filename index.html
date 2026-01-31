@@ -106,7 +106,7 @@
         <li>疯狂跑酷 🏃</li>
     </ul>
    <a href="https://www.baidu.com">
-    <img src="https://cataas.com/cat" >
+    <img id = "cat-img" src="https://cataas.com/cat" >
 </a>
     <p>
         <a href="#" class="my-button" onclick="getLuck()">查看今日运势</a>
@@ -153,7 +153,14 @@
             title.style.color = "#e74c3c"
            }
 
+           let catImg = document.getElementById("cat-img")
+
+           catImg.src = "https://cataas.com/cat?t=" + new Date().getTime();
+
         }
+
+
+
 
 
 
