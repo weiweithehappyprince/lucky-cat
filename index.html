@@ -39,6 +39,7 @@
                 text-decoration: none ;
                 padding: 15px 30px;  /* 棉花：上下15，左右30 */
                 border-radius: 30px; /* 胶囊圆角 */
+                transition: 0.3s; /*所有变化都要用0.3s */
 
             }
             /* 注意：冒号后面紧跟着 hover，不要有空格 */
@@ -105,11 +106,11 @@
         <li>偷吃小鱼干 🐟</li>
         <li>疯狂跑酷 🏃</li>
     </ul>
-   <a href="https://www.baidu.com">
-    <img id = "cat-img" src="https://cataas.com/cat" >
+   <a >
+    <img id = "cat-img" src = "" style="display:none" >
 </a>
     <p>
-        <a href="#" class="my-button" onclick="getLuck()">查看今日运势</a>
+        <a href="#" id = "luck-btn" class="my-button" onclick="getLuck()">查看今日运势</a>
     </p>
     <div class="social-box">
         <span>📞</span>
@@ -123,6 +124,8 @@
     <script>
         function getLuck(){
          let title = document.getElementById("fortune-text")
+         let catImg = document.getElementById("cat-img")
+         let btn = document.getElementById("luck-btn")
             // 1. 准备一个“菜单”（数组）
             // 你可以在这里随意加更多的词，记得用双引号包裹，逗号隔开
          let fortunes = [
@@ -140,20 +143,36 @@
             let index = Math.floor(Math.random()* fortunes.length)
             let result = fortunes[index]
 
+            //设置一个等待找猫咪的ui
+            btn.innerText = "🐱 召唤猫咪中..."
+            // 此时也可以把按钮颜色变灰一点，防止用户疯狂点击（可选优化）
+            btn.style.backgroundColor = "#ccc"
 
+            //计算运势并显示
             //3.把选中的拿出来，显示到屏幕
             //fortunes[index]的意思是“给我拿菜单第index号的菜”
-            title.innerText = fortunes[index]
+            title.innerText = "✨ 运势抽取中... ✨"
+            title.style.color = "#999"
+          
 
-            //4. 换颜色
-           if (result.includes("凶")){
-            title.style.color = "#555";
-           } else {
+           //设置图片加载监听器
+           //这段代码现在不会执行，而是等图片下载完的一瞬间自动执行
 
-            title.style.color = "#e74c3c"
-           }
+           catImg.onload = function(){
+            btn.innerText = "查看今日运势"
+            btn.style.backgroundColor = "yellowgreen"
 
-           let catImg = document.getElementById("cat-img")
+            title.innerText = result
+
+            if(result.includes("凶")){
+                title.style.color = "#555"
+            } else {
+                title.style.color = "#e74c3c"
+            }
+
+            catImg.style.display = "inline"
+          
+            }
 
            catImg.src = "https://cataas.com/cat?t=" + new Date().getTime();
 
